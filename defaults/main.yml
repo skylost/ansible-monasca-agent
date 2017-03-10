@@ -1,0 +1,23 @@
+---
+agent_reconfigure_script: /usr/local/bin/monasca-reconfigure
+default_service_name: system
+keystone_url: "https://127.0.0.1:5000/v3"
+monasca_checks: {}
+monasca_virtualenv_dir: /opt/venv/monasca-agent
+monasca_agent_system_only: True
+monasca_agent_user: "monasca-agent"
+monasca_agent_password: "monasca"
+monasca_agent_project: "admin"
+monasca_agent_dimensions: "cluster:standalone,cloud_name:mycloud,service:system"
+monasca_api_url: "https://127.0.0.1:8070/v2.0"
+monasca_agent_restart_required: False
+monasca_agent_check_frequency: 30
+monasca_agent_detection_args: send_rollup_stats=True
+monasca_conf_dir: /etc/monasca
+monasca_agent_check_plugin_dir: /usr/lib/monasca/agent/custom_checks.d/
+monasca_agent_detection_plugin_dir: /usr/lib/monasca/agent/custom_detect.d/
+system_cacert_file: "/etc/pki/ca-trust/source/anchors/ca-certificates.crt"
+virtualenv_url: https://github.com/skylost/virtualenv/blob/master/openstack
+
+monasca_tarball:
+  - monasca-agent

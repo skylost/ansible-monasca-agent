@@ -1,0 +1,11 @@
+---
+# Checking if the restart flag is defined marks it for deletion
+# Check for the opposite to avoid deleting it too early
+- name: monasca-agent | start | run monasca-setup
+  command: "{{ agent_reconfigure_script }}"
+
+- name: monasca-agent | start | restart monasca-agent
+  service: name=monasca-agent state=restarted enabled=yes
+
+- name: monasca-agent | start | Start monasca-agent
+  service: name=monasca-agent state=started enabled=yes

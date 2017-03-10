@@ -1,0 +1,6 @@
+---
+- name: main | set os variables
+  include_vars: "{{ ansible_os_family | lower }}.yml"
+
+- include: install.yml
+- include: configure.yml

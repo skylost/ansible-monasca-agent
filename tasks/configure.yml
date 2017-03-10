@@ -1,0 +1,30 @@
+---
+- name:  configure | create /opt/monasca
+  file: path=/opt/monasca state=directory owner=root group=root mode=0755
+
+- name: configure | symlink
+  file: src={{ monasca_virtualenv_dir }}/bin dest=/opt/monasca/bin state=link
+
+- name:  configure | create conf.d dir and custom plugin dirs
+  become: yes
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "{{ monasca_conf_dir }}"
+    - "{{ monasca_conf_dir }}/agent"
+    - "{{ monasca_conf_dir }}/agent/conf.d"
+    - "{{ monasca_agent_check_plugin_dir }}"
+    - "{{ monasca_agent_detection_plugin_dir }}"
+
+- name:  configure | Create reconfigure script
+  become: yes
+  template:
+    dest: "{{ agent_reconfigure_script }}"
+    src: monasca-reconfigure.j2
+    owner: root
+    group: root
+    mode: 0750
